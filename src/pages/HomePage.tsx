@@ -1,6 +1,6 @@
 import React from "react";
 import { useDebounce } from "../hooks/debounce";
-import { useSearchUsersQuery } from "../redux/store/github/github.api";
+import { useLazyGetUserReposQuery, useSearchUsersQuery } from "../redux/store/github/github.api";
 
 const HomePage = () => {
   // Стейт поиской строки
@@ -13,12 +13,17 @@ const HomePage = () => {
   // Запрос на сервер
   const { isLoading, isError, data } = useSearchUsersQuery(debounced, {
     skip: debounced.length < 3, // Предотвращение запроса, если символов < 3
+    refetchOnFocus: true,
   });
+
+  const [fetchRepos, { isError: reposError, isLoading: reposLoading, data: reposData }] = useLazyGetUserReposQuery();
 
   React.useEffect(() => {
     // toggle dropDown
     setIsDropDown(debounced.length > 3 && data?.length! > 0);
   }, [debounced, data]);
+
+  const clickHandler = (userName: string) => {};
 
   return (
     <>
@@ -45,6 +50,7 @@ const HomePage = () => {
                 <li
                   className="cursor-pointer px-4 py-2 transition-colors hover:bg-[#352f44] hover:text-white"
                   key={objId}
+                  onClick={() => clickHandler(obj.login)}
                 >
                   {obj.login}
                 </li>
