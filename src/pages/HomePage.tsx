@@ -1,4 +1,5 @@
 import React from "react";
+import ReposCard from "../components/ReposCard";
 import { useDebounce } from "../hooks/debounce";
 import { useLazyGetUserReposQuery, useSearchUsersQuery } from "../redux/store/github/github.api";
 
@@ -23,7 +24,10 @@ const HomePage = () => {
     setIsDropDown(debounced.length > 3 && data?.length! > 0);
   }, [debounced, data]);
 
-  const clickHandler = (userName: string) => {};
+  const clickHandler = (userName: string) => {
+    fetchRepos(userName);
+    setIsDropDown(false)
+  };
 
   return (
     <>
@@ -58,6 +62,17 @@ const HomePage = () => {
             )}
           </ul>
         )}
+
+        <div className="container max-h-[600px] overflow-y-auto shadow-md">
+          {reposLoading && <p className="text-center">Repos loading...</p>}
+          {reposData?.map((objRepo, objRepoId) => (
+            <ReposCard key={objRepoId} repos={objRepo} />
+
+            // <p key={objRepoId} className="text-center">
+            //   {objRepo.url}
+            // </p>
+          ))}
+        </div>
       </div>
     </>
   );

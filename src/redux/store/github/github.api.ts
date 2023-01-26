@@ -1,3 +1,4 @@
+import { IRepos } from "./../../../models/models";
 // RTQ
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"; // не забыть дописывать /react
 import { IServerResponse, IUser } from "../../../models/models";
@@ -13,7 +14,7 @@ export const githubApi = createApi({
   // Дополнительные варианты/параметры запросов
   endpoints: (build) => ({
     // Типизация запроса: 1 - какие типы данных получаем с сервера, 2 - какой тип данных передаем в параматеры запроса
-    // Также это название 'searchUsers' - может быть любым
+    // Также это название 'searchUsers' - может быть любым | useSearchUsersQuery
     searchUsers: build.query<IUser[], string>({
       // Дублируем тип данных для параметра запроса
       query: (search: string) => ({
@@ -29,14 +30,19 @@ export const githubApi = createApi({
       },
     }),
 
-    // Получение репозиториев пользователей
-    getUserRepos: build.query<any, string>({
+    // Получение репозиториев пользователей | useLazyGetUserReposQuery
+    getUserRepos: build.query<IRepos[], string>({
       query: (userName: string) => ({
         url: `users/${userName}/repos`,
       }),
+    }),
+
+    // Создание пользователя шаблон (если бы бек это поддерживал)
+    createUser: build.mutation<any, void>({
+      query: () => `...someurl`,
     }),
   }),
 });
 
 // Получение кастомных хуков запроса на сервер
-export const { useSearchUsersQuery, useLazyGetUserReposQuery } = githubApi; // lazy - позволяет нам делать запрос, когда хотим именно мы, остальные выполняют автоматически
+export const { useSearchUsersQuery, useLazyGetUserReposQuery, useCreateUserMutation } = githubApi; // lazy - позволяет нам делать запрос, когда хотим именно мы, остальные выполняют автоматически
