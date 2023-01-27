@@ -1,0 +1,17 @@
+.navTestClass {
+  @apply flex h-20 items-center justify-between bg-[#2a2438] px-5 text-white shadow-md;
+}
+
+// Используется npm i -D sass
+// Может понадобиться такой вариант:
+/* 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .navTest {
+      @apply flex h-20 items-center justify-between bg-[#2a2438] px-5 text-white shadow-md;
+    }
+  }
+*/
