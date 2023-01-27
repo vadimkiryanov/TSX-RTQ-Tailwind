@@ -3,6 +3,8 @@ import { useActions } from "../hooks/actions";
 import { useAppSelector } from "../hooks/redux";
 import { IRepos } from "../models/models";
 
+import style from "./Repos.module.scss"; // Использование модуля scss
+
 interface IReposCard {
   repos: IRepos;
 }
@@ -27,9 +29,9 @@ const ReposCard: React.FC<IReposCard> = ({ repos }) => {
     removeFavourite(repos.html_url);
     setIsFav(false);
   };
-
+  //style
   return (
-    <div className="hover:button group mb-2 flex items-center justify-between rounded border py-3 px-5 transition-all hover:bg-[#4e4466] hover:text-white hover:shadow-md">
+    <div className="wrapperRepos">
       <a href={repos.html_url} target="_blank" rel="noreferrer">
         <h2 className="text-lg font-bold ">{repos.full_name}</h2>
         <p className="text-sm">
@@ -41,17 +43,11 @@ const ReposCard: React.FC<IReposCard> = ({ repos }) => {
       </a>
 
       {isFav ? (
-        <button
-          className="rounded bg-[#4e4466] py-2 px-4 font-bold text-white transition-all group-hover:bg-red-500 group-hover:text-white"
-          onClick={removeFromFavourite}
-        >
+        <button className="btnDelete" onClick={removeFromFavourite}>
           Delete
         </button>
       ) : (
-        <button
-          className="rounded bg-[#4e4466] py-2 px-4 font-bold text-white transition-all group-hover:bg-green-500 "
-          onClick={addToFavourite}
-        >
+        <button className="btnAdd" onClick={addToFavourite}>
           Add
         </button>
       )}

@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../hooks/redux";
 
-import style from './Test.module.scss';
+
 
 export interface IBtnLinkProps {
   children: ReactNode;
@@ -28,7 +28,7 @@ const Navigation = () => {
   const { favourites } = useAppSelector((state) => state.github);
 
   return (
-    <nav className={style.navTestClass}> {/* Использование модуля scss */}
+    <nav className='flex h-20 items-center justify-between bg-[#2a2438] px-5 text-white shadow-md'> 
       <h3 className="font-bold">Github Search</h3>
 
       <span>

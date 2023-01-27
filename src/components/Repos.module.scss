@@ -1,0 +1,42 @@
+// Кастомное подключение стилей через модули
+/* .wrapperRepos {
+  @apply mb-2 flex items-center justify-between rounded border py-3 px-5 transition-all hover:bg-[#4e4466] hover:text-white hover:shadow-md;
+
+  &:hover {
+    .btnAdd {
+      &:hover {
+        @apply bg-green-400 text-white;
+      }
+      @apply bg-white text-black;
+    }
+
+    .btnDelete {
+      &:hover {
+        @apply bg-red-500 text-white;
+      }
+      @apply bg-white text-black;
+    }
+  }
+}
+
+.btnAdd {
+  @apply rounded bg-[#4e4466] py-2 px-4 font-bold text-white transition-all hover:bg-green-500;
+}
+
+.btnDelete {
+  @apply rounded bg-[#4e4466] py-2 px-4 font-bold text-white transition-all hover:bg-red-500;
+} */
+
+// Используется npm i -D sass
+// Может понадобиться такой вариант:
+/* 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .navTest {
+      @apply flex h-20 items-center justify-between bg-[#2a2438] px-5 text-white shadow-md;
+    }
+  }
+*/

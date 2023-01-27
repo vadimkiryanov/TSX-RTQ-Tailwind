@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// Кастомное подключение стилей
+@layer components {
+  .wrapperRepos {
+    @apply mb-2 flex items-center justify-between rounded border py-3 px-5 transition-all hover:bg-[#4e4466] hover:text-white hover:shadow-md;
+  
+    &:hover {
+      .btnAdd {
+        &:hover {
+          @apply bg-green-400 text-white;
+        }
+        @apply bg-white text-black;
+      }
+  
+      .btnDelete {
+        &:hover {
+          @apply bg-red-500 text-white;
+        }
+        @apply bg-white text-black;
+      }
+    }
+  }
+  
+  .btnAdd {
+    @apply rounded bg-[#4e4466] py-2 px-4 font-bold text-white transition-all hover:bg-green-500;
+  }
+  
+  .btnDelete {
+    @apply rounded bg-[#4e4466] py-2 px-4 font-bold text-white transition-all hover:bg-red-500;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
