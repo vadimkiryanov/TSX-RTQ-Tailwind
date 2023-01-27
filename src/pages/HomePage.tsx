@@ -5,7 +5,7 @@ import { useLazyGetUserReposQuery, useSearchUsersQuery } from "../redux/store/gi
 
 const HomePage = () => {
   // Стейт поиской строки
-  const [searchValue, setSearchValue] = React.useState<string>("vadim");
+  const [searchValue, setSearchValue] = React.useState<string>("");
   const [isDropDown, setIsDropDown] = React.useState<boolean>(false);
 
   // Задержка запроса
@@ -29,6 +29,24 @@ const HomePage = () => {
     setIsDropDown(false);
   };
 
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
+  // Скрытие попапа при клике на body
+  React.useEffect(() => {
+    // Функция закрытия попапа при клике на body
+    const handleClickOutside = (event: MouseEvent) => {
+      inputRef.current && !event.composedPath().includes(inputRef.current) && setIsDropDown(false);
+      // console.log(inputRef.current);
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    // Удаление прослушки при переходе на другой page
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="container  mx-auto px-5">
       <div className="mx-auto flex  justify-center pt-10">
@@ -39,6 +57,7 @@ const HomePage = () => {
       </div>
       <div className="mw-[560px] relative mx-auto sm:w-[560px]">
         <input
+          ref={inputRef}
           type="text"
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
