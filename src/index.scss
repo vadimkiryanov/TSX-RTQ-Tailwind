@@ -5,8 +5,8 @@
 // Кастомное подключение стилей
 @layer components {
   .wrapperRepos {
-    @apply mb-2 flex items-center justify-between rounded border py-3 px-5 transition-all hover:bg-[#4e4466] hover:text-white hover:shadow-md;
-  
+    @apply mb-2 flex mr-2 items-center justify-between rounded border py-3 px-5 transition-all hover:bg-[#4e4466] hover:text-white hover:shadow-md dark:text-gray-300;
+
     &:hover {
       .btnAdd {
         &:hover {
@@ -14,7 +14,7 @@
         }
         @apply bg-white text-black;
       }
-  
+
       .btnDelete {
         &:hover {
           @apply bg-red-500 text-white;
@@ -23,11 +23,11 @@
       }
     }
   }
-  
+
   .btnAdd {
     @apply rounded bg-[#4e4466] py-2 px-4 font-bold text-white transition-all hover:bg-green-500;
   }
-  
+
   .btnDelete {
     @apply rounded bg-[#4e4466] py-2 px-4 font-bold text-white transition-all hover:bg-red-500;
   }
@@ -39,6 +39,25 @@ body {
     "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  @apply  dark:bg-neutral-900 dark:text-gray-300;
+}
+
+input {
+  @apply dark:bg-neutral-900;
+}
+ul {
+  @apply dark:bg-neutral-900;
+}
+
+// Скролл
+* {
+  &::-webkit-scrollbar {
+    @apply dark:bg-neutral-700 dark:w-2 dark:rounded-sm;
+  }
+  &::-webkit-scrollbar-thumb {
+    @apply dark:bg-neutral-800;
+  }
 }
 
 code {

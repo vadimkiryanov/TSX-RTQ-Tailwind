@@ -5,7 +5,7 @@ import { useLazyGetUserReposQuery, useSearchUsersQuery } from "../redux/store/gi
 
 const HomePage = () => {
   // Стейт поиской строки
-  const [searchValue, setSearchValue] = React.useState<string>("");
+  const [searchValue, setSearchValue] = React.useState<string>("vadim");
   const [isDropDown, setIsDropDown] = React.useState<boolean>(false);
 
   // Задержка запроса
@@ -26,44 +26,65 @@ const HomePage = () => {
 
   const clickHandler = (userName: string) => {
     fetchRepos(userName);
-    setIsDropDown(false)
+    setIsDropDown(false);
   };
 
   return (
-    <>
+    <div className="container  mx-auto px-5">
       <div className="mx-auto flex  justify-center pt-10">
         {isLoading && <p className="text-center text-blue-600">Loading...</p>}
       </div>
       <div className="mx-auto flex  justify-center pt-10">
         {isError && <p className="text-center text-red-600">Something went wrong</p>}
       </div>
-      <div className="relative mx-auto w-[560px]">
+      <div className="mw-[560px] relative mx-auto sm:w-[560px]">
         <input
           type="text"
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
-          className="mb-2 h-11 w-full border py-2 px-4 "
+          className="mb-2 h-11 w-full rounded-md border py-2 px-4"
           placeholder="Search for Github username..."
+          onFocus={() => setIsDropDown(true)}
         />
+
+        {searchValue && (
+          <svg
+            viewBox="0 0 32 32"
+            className="absolute right-3 top-2 h-7 w-7 cursor-pointer opacity-30 transition-opacity hover:opacity-80"
+            onClick={() => setSearchValue("")}
+          >
+            <path
+              d="m7 7 18 18M7 25 25 7"
+              fill="none"
+              stroke="#ffffff"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2px"
+              className="stroke-000000"
+            ></path>
+          </svg>
+        )}
+
         {isDropDown && (
-          <ul className="absolute top-11 left-0 right-0 max-h-52 list-none overflow-y-scroll bg-white shadow-md">
+          <ul className="absolute top-12 left-0 right-0 max-h-72 list-none overflow-y-scroll rounded-md bg-white shadow-md dark:border">
             {isLoading ? (
               <p className="text-center">Loading...</p>
             ) : (
               data?.map((obj, objId) => (
                 <li
-                  className="cursor-pointer px-4 py-2 transition-colors hover:bg-[#352f44] hover:text-white"
+                  className="flex cursor-pointer items-center justify-start gap-3 px-4 py-2 transition-colors hover:bg-[#352f44] hover:text-white dark:bg-[#2a2438] dark:hover:bg-[#352f44]"
                   key={objId}
                   onClick={() => clickHandler(obj.login)}
                 >
-                  {obj.login}
+                  <img src={obj.avatar_url} alt="avatar" className="w-7  rounded-md" />
+                  <strong> {obj.login}</strong>
                 </li>
               ))
             )}
           </ul>
         )}
 
-        <div className="container max-h-[600px] overflow-y-auto shadow-md">
+        <div className="container max-h-96 overflow-y-auto shadow-md">
           {reposLoading && <p className="text-center">Repos loading...</p>}
           {reposData?.map((objRepo, objRepoId) => (
             <ReposCard key={objRepoId} repos={objRepo} />
@@ -74,7 +95,7 @@ const HomePage = () => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

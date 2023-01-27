@@ -33,8 +33,8 @@ const ReposCard: React.FC<IReposCard> = ({ repos }) => {
   return (
     <div className="wrapperRepos">
       <a href={repos.html_url} target="_blank" rel="noreferrer">
-        <h2 className="text-lg font-bold ">{repos.full_name}</h2>
-        <p className="text-sm">
+        <h2 className="text-sm font-bold sm:text-lg ">{repos.full_name}</h2>
+        <p className="text-xs sm:text-sm">
           Forks: <span className="mr-2 font-bold">{repos.forks}</span>
           Watchers: <span className="font-bold">{repos.watchers}</span>
         </p>

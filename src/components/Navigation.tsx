@@ -28,10 +28,10 @@ const Navigation = () => {
   const { favourites } = useAppSelector((state) => state.github);
 
   return (
-    <nav className='flex h-20 items-center justify-between bg-[#2a2438] px-5 text-white shadow-md'> 
-      <h3 className="font-bold">Github Search</h3>
+    <nav className='flex flex-col sm:flex-row h-24 sm:h-20 items-center justify-start sm:justify-between bg-[#2a2438] px-5 text-white shadow-md'> 
+      <h3 className="font-bold mb-5 mt-2 sm:m-0">Github Search</h3>
 
-      <span>
+      <span >
         <BtnLink toPath="/">Home</BtnLink>
         <BtnLink toPath="/favourites">Favourites {favourites.length}</BtnLink>
       </span>
