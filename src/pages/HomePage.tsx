@@ -84,7 +84,7 @@ const HomePage = () => {
           </svg>
         )}
 
-        {isDropDown && (
+        {isDropDown && data && (
           <ul className="absolute top-12 left-0 right-0 max-h-72 list-none overflow-y-scroll rounded-md bg-white shadow-md dark:border">
             {isLoading ? (
               <p className="text-center">Loading...</p>
